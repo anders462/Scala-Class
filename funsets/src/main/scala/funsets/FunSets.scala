@@ -45,7 +45,7 @@ object FunSets {
   /**
    * Returns the subset of `s` for which `p` holds.
    */
-    def filter(s: Set, p: Int => Boolean): Set = (elem: Int) => contains(s, elem) && p(elem)
+    def filter(s: Set, p: Int => Boolean): Set = (elem: Int) => s(elem) && p(elem)
   
 
   /**
@@ -57,7 +57,7 @@ object FunSets {
    * Returns whether all bounded integers within `s` satisfy `p`.
    */
     def forall(s: Set, p: Int => Boolean): Boolean = {
-    def iter(a: Int): Boolean = {
+      @annotation.tailrec def iter(a: Int): Boolean = {
       if (a > bound) true
       else if (s(a) && !(s(a) && p(a))) false
       else iter(a + 1)
